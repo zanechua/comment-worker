@@ -32,6 +32,17 @@ openssl pkcs8 -topk8 -inform PEM -outform PEM -nocrypt -in private-key.pem -out 
 
 ### Setup
 
+Create a `.dev.vars` at the root of the repository and the format should follow the `dotenv` format of `KEY=VALUE` and a new line for each of the environment variables
+
+Create a GitHub app by going to [https://github.com/settings/apps](https://github.com/settings/apps) with the permissions of the following:
+
+![GHA Permissions](https://github.com/zanechua/comment-worker/assets/4265429/a5b7e22d-fc15-4828-8289-b9de3958ee24)
+
+Make sure to generate the private key and download the pem file. Follow the conversion to the pkcs8 key and input the private key with `\n` as the separators for the line breaks. 
+
+E.g. `GITHUB_APP_PRIVATE_KEY=-----BEGIN PRIVATE KEY-----\nMIIEvQ...`
+
+Run the following to load up the app
 ```bash
 pnpm install
 pnpm dev
