@@ -1,0 +1,74 @@
+# CI
+build.env
+
+# Built Files
+public/assets
+
+# Environment variables, never commit this file
+.env
+.node-persist
+envData.json
+
+# VSCode & Webstorm history directories
+.history
+.idea
+.vscode
+
+# Next.js working directory
+.next
+
+# Mac OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Git
+.git
+CHANGELOG-LATEST.md
+
+# node.js
+.yarn
+yarn.lock.sha256sum
+package-lock.json
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnp
+.pnp.js
+
+# Cloufare Worker
+/target
+/dist
+**/*.rs.bk
+Cargo.lock
+bin/
+pkg/
+wasm-pack.log
+.wrangler/
+.cargo-ok
+.dev.vars
+
+# The development sqlite file
+src/database/development.sqlite
+
+# Docker container log files
+docker/nginx/storage
+
+# Test result files
+artifacts
+test-result-junit.xml
+test-result-xunit.xml
+
+# Docs
+doc
+
+# Code coverage and quality checks
+coverage
+src/coverage
+.scannerwork
+.nyc_output

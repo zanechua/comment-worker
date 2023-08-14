@@ -1,0 +1,24 @@
+# The name of your Worker. Alphanumeric values and dashes only.
+name = "comment-worker"
+
+# The entrypoint/path to the file that will be executed.
+main = "./src/index.js"
+
+# Whether you use `<NAME>.<SUBDOMAIN>.workers.dev` to
+# test and deploy your Worker.
+# @default `true`
+workers_dev = true
+
+# A date in the form yyyy-mm-dd, which will be used to determine
+# which version of the Workers runtime is used.
+compatibility_date = "2023-08-11"
+
+## example config ##
+#routes = [
+#    { pattern = "comments.zanechua.com", custom_domain = true }
+#]
+#
+#[vars]
+#GITHUB_ORGANIZATION_SLUG = "zanechua"
+#GITHUB_REPOSITORY_SLUG = "website"
+#CW_ALLOWED_ORIGINS = "https://zanechua.com"
