@@ -6,6 +6,8 @@ Essentially it is a direct replacement for [staticman](https://github.com/eduard
 
 Please see [Issue #1](https://github.com/zanechua/comment-worker/issues/1) for more info
 
+[![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/zanechua/comment-worker)
+
 # Usage
 
 You need to declare the following variables
