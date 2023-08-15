@@ -1,12 +1,13 @@
 {
   "private": true,
   "name": "comment-worker",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "main": "index.js",
   "scripts": {
     "lint": "eslint --ignore-path .gitignore . --ext .js --ext .jsx --ext .ts --ext .tsx",
     "format": "prettier --write '**/*.{js,css,json,md}'",
     "dev": "wrangler dev",
+    "release": "standard-version -a",
     "deploy": "wrangler deploy"
   },
   "author": "PubInf",
@@ -39,6 +40,7 @@
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-unused-imports": "^3.0.0",
     "prettier": "^3.0.1",
+    "standard-version": "^9.5.0",
     "wrangler": "^3.5.0"
   }
 }
