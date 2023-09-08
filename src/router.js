@@ -5,6 +5,7 @@ import { cors } from 'hono/cors';
 import { isUndefined } from 'lodash';
 import yaml from 'yaml';
 import { z } from 'zod';
+import { Base64 } from 'js-base64';
 
 import GitHub from './github';
 import { convertFormDataToObject, handlePlaceholders, objectToMarkdownTable } from './util';
@@ -46,7 +47,8 @@ app.post('/api/handle/form', async c => {
   const gh = await GitHub.initialize(appId, formattedPrivateKey, organizationSlug, repositorySlug);
 
   const staticmanFile = await gh.getFileFromRepository('staticman.yml', repositoryBranch);
-  const staticmanConfigJson = yaml.parse(atob(staticmanFile.content));
+
+  const staticmanConfigJson = yaml.parse(Base64.decode(staticmanFile.content));
   const staticmanCommentsConfig = staticmanConfigJson.comments;
 
   let body;
@@ -115,8 +117,9 @@ app.post('/api/handle/form', async c => {
   const directoryPath = Object.prototype.hasOwnProperty.call(staticmanCommentsConfig, 'path')
     ? handlePlaceholders(staticmanCommentsConfig.path, fields, validatedOptions)
     : `_data/results/${new Date(fields.date).valueOf()}`;
+
   const yamlData = yaml.stringify(fields);
-  const base64YamlData = btoa(yamlData);
+  const base64YamlData = Base64.encode(yamlData);
 
   const defaultBranch = staticmanCommentsConfig?.branch || 'master';
   const branch = `commentworker_${commentId}`;

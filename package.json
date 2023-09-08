@@ -22,6 +22,7 @@
   "dependencies": {
     "@paralleldrive/cuid2": "^2.2.2",
     "hono": "^3.4.1",
+    "js-base64": "^3.7.5",
     "lodash": "^4.17.21",
     "universal-github-app-jwt": "^2.0.5",
     "yaml": "^2.3.1",
