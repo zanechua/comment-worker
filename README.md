@@ -22,15 +22,15 @@ Install the app into the repository you are intending to use with `comment-worke
 
 You need to declare the following variables in the Cloudflare worker variable settings
 
-| key                      | example                                     |
-|--------------------------|---------------------------------------------|
-| GITHUB_APP_ID            | 123456                                      |
-| GITHUB_APP_PRIVATE_KEY   | -----BEGIN PRIVATE KEY-----...              |
-| GITHUB_ORGANIZATION_SLUG | org                                         |
-| GITHUB_REPOSITORY_SLUG   | repo-name                                   |
-| GITHUB_REPOSITORY_BRANCH | main                                        |
-| CW_ALLOWED_ORIGINS       | https://example.com,https://www.example.com |
-| CW_DEBUG                 | false                                       |
+| key                      | example                                     | description                                                           |
+|--------------------------|---------------------------------------------|-----------------------------------------------------------------------|
+| GITHUB_APP_ID            | 123456                                      | App Id of GitHub App which will be committing to your repository      |
+| GITHUB_APP_PRIVATE_KEY   | -----BEGIN PRIVATE KEY-----...              | Private Key of GitHub App which will be committing to your repository |
+| GITHUB_ORGANIZATION_SLUG | org                                         | Organization name or username that the repository belongs to          |
+| GITHUB_REPOSITORY_SLUG   | repo-name                                   | Repository name                                                       |
+| GITHUB_REPOSITORY_BRANCH | main                                        | Branch where the site configuration lies                              |
+| CW_ALLOWED_ORIGINS       | https://example.com,https://www.example.com | Allowed origins that can send a request to the comment-worker         |
+| CW_DEBUG                 | false                                       | Turning debug mode on or off                                          |
 
 The `GITHUB_APP_PRIVATE_KEY` needs to be in pkcs8 format, convert the key to pkcs8 format by following the `openssl` command below and input the private key with `\n` as the separators for the line breaks.
 
