@@ -40,10 +40,12 @@ app.post('/api/handle/form', async c => {
   const formattedPrivateKey = env.GITHUB_APP_PRIVATE_KEY.replace(/\\n/g, '\n');
   const organizationSlug = env.GITHUB_ORGANIZATION_SLUG;
   const repositorySlug = env.GITHUB_REPOSITORY_SLUG;
+  const repositoryBranch = env.GITHUB_REPOSITORY_BRANCH;
+  const shouldDebug = env.CW_DEBUG === 'true';
 
   const gh = await GitHub.initialize(appId, formattedPrivateKey, organizationSlug, repositorySlug);
 
-  const staticmanFile = await gh.getFileFromRepository('staticman.yml', 'master');
+  const staticmanFile = await gh.getFileFromRepository('staticman.yml', repositoryBranch);
   const staticmanConfigJson = yaml.parse(atob(staticmanFile.content));
   const staticmanCommentsConfig = staticmanConfigJson.comments;
 
@@ -61,6 +63,8 @@ app.post('/api/handle/form', async c => {
   // Handle the fields and options
   const fieldValues = body.fields || {};
   const optionValues = body.options || {};
+
+  if (shouldDebug) console.log(fieldValues);
 
   // Handle the default config from the yml file
   const allowedFields = staticmanCommentsConfig?.allowedFields || [];

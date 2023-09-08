@@ -28,7 +28,9 @@ You need to declare the following variables in the Cloudflare worker variable se
 | GITHUB_APP_PRIVATE_KEY   | -----BEGIN PRIVATE KEY-----...              |
 | GITHUB_ORGANIZATION_SLUG | org                                         |
 | GITHUB_REPOSITORY_SLUG   | repo-name                                   |
+| GITHUB_REPOSITORY_BRANCH | main                                        |
 | CW_ALLOWED_ORIGINS       | https://example.com,https://www.example.com |
+| CW_DEBUG                 | false                                       |
 
 The `GITHUB_APP_PRIVATE_KEY` needs to be in pkcs8 format, convert the key to pkcs8 format by following the `openssl` command below and input the private key with `\n` as the separators for the line breaks.
 
