@@ -1,5 +1,17 @@
 # Changelog
 
+### [0.0.2](https://github.com/zanechua/comment-worker/compare/v0.0.1...v0.0.2) (2023-09-08)
+
+
+### Features
+
+* add site configuration branch env and debug env variables ([b33a126](https://github.com/zanechua/comment-worker/commit/b33a1260d2a316ffe8324be09619ed879bf5f994))
+
+
+### Bug Fixes
+
+* use js-base64 for proper UTF8 support ([4f88f28](https://github.com/zanechua/comment-worker/commit/4f88f2869e6fc3915fbbead956fc5eeab582d48d))
+
 ### 0.0.1 (2023-08-15)
 
 
