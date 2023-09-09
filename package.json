@@ -9,7 +9,7 @@
     "dev": "wrangler dev",
     "release": "standard-version -a"
   },
-  "author": "PubInf",
+  "author": "ZaneChua",
   "contributors": [
     {
       "name": "Zane J. Chua",
