@@ -111,8 +111,7 @@ We're using Cloudflare workers + wrangler to handle the deployments, we have to 
 You need to run the deploy command with the `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN` variables before running the command.
 
 ```bash
-pnpm build
-CLOUDFLARE_ACCOUNT_ID=abc CLOUDFLARE_API_TOKEN=abc pnpm deploy
+CLOUDFLARE_ACCOUNT_ID=abc CLOUDFLARE_API_TOKEN=abc pnpm wrangler deploy
 ```
 
 # Development Setup
