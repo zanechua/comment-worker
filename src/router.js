@@ -71,6 +71,8 @@ app.post('/api/handle/form', async c => {
   // Handle the default config from the yml file
   const allowedFields = staticmanCommentsConfig?.allowedFields || [];
   const requiredFields = staticmanCommentsConfig?.requiredFields || [];
+  const allowedOptions = staticmanCommentsConfig?.allowedOptions || [];
+  const requiredOptions = staticmanCommentsConfig?.requiredOptions || [];
   const moderation = staticmanCommentsConfig?.moderation === 'true' || true;
   const fieldTransforms = staticmanCommentsConfig?.transforms || staticmanCommentsConfig?.fieldTransforms || {};
   const optionTransforms = staticmanCommentsConfig?.optionTransforms || {};
@@ -90,7 +92,7 @@ app.post('/api/handle/form', async c => {
   }
 
   // Build input options schema
-  const optionInputSchema = z.object(buildSchemaObject(Object.keys(optionValues), [], optionTransforms)).strict();
+  const optionInputSchema = z.object(buildSchemaObject(allowedOptions, requiredOptions, optionTransforms)).strict();
 
   // Validate the input options and escape
   const { validatedSchema: validatedOptions } = await Validator.check(optionInputSchema, optionValues);
