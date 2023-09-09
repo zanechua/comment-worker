@@ -9,8 +9,8 @@ dependencies:
     specifier: ^2.2.2
     version: 2.2.2
   hono:
-    specifier: ^3.4.1
-    version: 3.4.1
+    specifier: ^3.5.8
+    version: 3.5.8
   js-base64:
     specifier: ^3.7.5
     version: 3.7.5
@@ -21,11 +21,11 @@ dependencies:
     specifier: ^2.0.5
     version: 2.0.5
   yaml:
-    specifier: ^2.3.1
-    version: 2.3.1
+    specifier: ^2.3.2
+    version: 2.3.2
   zod:
-    specifier: ^3.21.4
-    version: 3.21.4
+    specifier: ^3.22.2
+    version: 3.22.2
 
 devDependencies:
   eslint:
@@ -2030,8 +2030,8 @@ packages:
       function-bind: 1.1.1
     dev: true
 
-  /hono@3.4.1:
-    resolution: {integrity: sha512-fA7/cfgNg060mt12cYykdstwqM/bRvqYmQlPpEjoKIwMs6QF1rPJzZjppCrFuZZJvKE1vEP6kEAaaDH96XRg7Q==}
+  /hono@3.5.8:
+    resolution: {integrity: sha512-ZipTmGfHm43q5QOEBGog2wyejyNUcicjPt0BLDQ8yz9xij/y9RYXRpR1YPxMpQqeyNM7isvpsIAe9Ems51Wq0Q==}
     engines: {node: '>=16.0.0'}
     dev: false
 
@@ -2530,7 +2530,7 @@ packages:
       workerd: 1.20230807.0
       ws: 8.13.0
       youch: 3.2.3
-      zod: 3.21.4
+      zod: 3.22.2
     transitivePeerDependencies:
       - bufferutil
       - supports-color
@@ -3723,8 +3723,8 @@ packages:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
     dev: true
 
-  /yaml@2.3.1:
-    resolution: {integrity: sha512-2eHWfjaoXgTBC2jNM1LRef62VQa0umtvRiDSk6HSzW7RvS5YtkabJrwYLLEKWBc8a5U2PTSCs+dJjUTJdlHsWQ==}
+  /yaml@2.3.2:
+    resolution: {integrity: sha512-N/lyzTPaJasoDmfV7YTrYCI0G/3ivm/9wdG0aHuheKowWQwGTsK0Eoiw6utmzAnI6pkJa0DUVygvp3spqqEKXg==}
     engines: {node: '>= 14'}
     dev: false
 
@@ -3759,5 +3759,5 @@ packages:
       stacktracey: 2.1.8
     dev: true
 
-  /zod@3.21.4:
-    resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
+  /zod@3.22.2:
+    resolution: {integrity: sha512-wvWkphh5WQsJbVk1tbx1l1Ly4yg+XecD+Mq280uBGt9wa5BKSWf4Mhp6GmrkPixhMxmabYY7RbzlwVP32pbGCg==}
