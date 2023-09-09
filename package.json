@@ -7,8 +7,7 @@
     "lint": "eslint --ignore-path .gitignore . --ext .js --ext .jsx --ext .ts --ext .tsx",
     "format": "prettier --write '**/*.{js,css,json,md}'",
     "dev": "wrangler dev",
-    "release": "standard-version -a",
-    "deploy": "wrangler deploy"
+    "release": "standard-version -a"
   },
   "author": "ZaneChua",
   "contributors": [

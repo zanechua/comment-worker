@@ -47,6 +47,9 @@ app.post('/api/handle/form', async c => {
   const gh = await GitHub.initialize(appId, formattedPrivateKey, organizationSlug, repositorySlug);
 
   const staticmanFile = await gh.getFileFromRepository('staticman.yml', repositoryBranch);
+  if (!staticmanFile?.content) {
+    return c.text('Missing staticman.yml', 500);
+  }
 
   const staticmanConfigJson = yaml.parse(Base64.decode(staticmanFile.content));
   const staticmanCommentsConfig = staticmanConfigJson.comments;
@@ -56,10 +59,10 @@ app.post('/api/handle/form', async c => {
 
   if (contentTypeHeader === 'application/x-www-form-urlencoded') {
     body = convertFormDataToObject(await req.parseBody());
-  }
-
-  if (contentTypeHeader === 'application/json') {
+  } else if (contentTypeHeader === 'application/json') {
     body = await req.json();
+  } else {
+    return c.text('Unsupported Content-Type', 400);
   }
 
   // Handle the fields and options
@@ -138,6 +141,10 @@ app.post('/api/handle/form', async c => {
     base64YamlData,
     moderation ? branch : defaultBranch
   );
+
+  if (!createCommentFileResponse?.content) {
+    return c.text('Failed to create comment file. Please check if your file path is valid.', 422);
+  }
 
   if (moderation) {
     const pullRequestBody = Object.prototype.hasOwnProperty.call(

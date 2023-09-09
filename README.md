@@ -10,13 +10,15 @@ Please see [Issue #1](https://github.com/zanechua/comment-worker/issues/1) for m
 
 # Usage
 
+## Setup
+
 Click on the Deploy with Workers button above and follow through the steps to finish the setup.
 
 Create a GitHub app by going to [https://github.com/settings/apps](https://github.com/settings/apps) with the permissions of the following:
 
 ![GHA Permissions](https://github.com/zanechua/comment-worker/assets/4265429/a5b7e22d-fc15-4828-8289-b9de3958ee24)
 
-Make sure to generate the private key and download the pem file. 
+Make sure to generate the private key and download the pem file.
 
 Install the app into the repository you are intending to use with `comment-worker`
 
@@ -40,6 +42,68 @@ openssl pkcs8 -topk8 -inform PEM -outform PEM -nocrypt -in private-key.pem -out 
 
 E.g. `GITHUB_APP_PRIVATE_KEY=-----BEGIN PRIVATE KEY-----\nMIIEvQ...`
 
+Add `staticman.yml` to the root of your repository on `GITHUB_REPOSITORY_BRANCH`. [Example](https://github.com/zanechua/website/blob/master/staticman.yml)
+
+## API
+
+POST `https://your-worker-subdomain.workers.dev/api/handle/form`.
+
+Support both `application/x-www-form-urlencoded` and `application/json` content types (must be specified in the `Content-Type` header).
+
+<details>
+<summary><b>JSON example</b></summary>
+
+```json
+{
+  "fields": {
+    "name": "John Doe",
+    "email": "johndoe@example.com",
+    "message": "Hello world!",
+    "slug": "your/page/slug"
+  },
+  "options": {
+    "url": "https://example.com"
+  }
+}
+```
+
+</details>
+
+<details>
+<summary><b>Form example</b></summary>
+
+```html
+<form
+  submit="https://your-worker-subdomain.workers.dev/api/handle/form"
+  method="POST"
+>
+  <div>
+    <label for="fields[name]">Name</label>
+    <input type="text" name="fields[name]" value="John Doe" required>
+  </div>
+  <div>
+    <label for="fields[email]">Email</label>
+    <input type="email" name="fields[email]" value="" required>
+  </div>
+  <div>
+    <label for="options[url]">Website</label>
+    <input type="url" name="options[url]" placeholder="https://example.com">
+  <div>
+    <label for="fields[message]">Message</label>
+    <textarea name="fields[message]" required>Hello world!</textarea>
+  </div>
+  <div style="display: none">
+    <label for="fields[slug]">Slug</label>
+    <input type="text" name="fields[slug]" value="your/page/slug" readonly>
+  </div>
+
+  <button type="submit">Submit</button>
+  <button type="reset">Reset</button>
+</form>
+```
+
+</details>
+
 # Manual Deployment
 
 We're using Cloudflare workers + wrangler to handle the deployments, we have to use wrangler due to the features we are using that requires wrangler to package the bundle up.
@@ -49,7 +113,7 @@ You need to run the deploy command with the `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFL
 You can use the `example config` section in the `wrangler.toml` for easier deployment to your cloudflare worker, just uncomment the section and replace with your own values
 
 ```bash
-CLOUDFLARE_ACCOUNT_ID=abc CLOUDFLARE_API_TOKEN=abc pnpm deploy
+CLOUDFLARE_ACCOUNT_ID=abc CLOUDFLARE_API_TOKEN=abc pnpm wrangler deploy
 ```
 
 # Development Setup
