@@ -10,7 +10,7 @@ const buildSchemaObject = (allowedFields, requiredFields, transforms = {}) => {
           .transform(val => escape(val))
           .transform(async val =>
             Object.prototype.hasOwnProperty.call(transforms, key)
-              ? await handleHash(transforms[key])
+              ? await handleHash(transforms[key], val)
               : val
           )
       : z
@@ -18,7 +18,7 @@ const buildSchemaObject = (allowedFields, requiredFields, transforms = {}) => {
           .transform(val => escape(val))
           .transform(async val =>
             Object.prototype.hasOwnProperty.call(transforms, key)
-              ? await handleHash(transforms[key])
+              ? await handleHash(transforms[key], val)
               : val
           )
           .optional();
