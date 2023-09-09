@@ -42,7 +42,7 @@ openssl pkcs8 -topk8 -inform PEM -outform PEM -nocrypt -in private-key.pem -out 
 
 E.g. `GITHUB_APP_PRIVATE_KEY=-----BEGIN PRIVATE KEY-----\nMIIEvQ...`
 
-Add `staticman.yml` to the root of your repository. [Example](https://github.com/zanechua/website/blob/master/staticman.yml)
+Add `staticman.yml` to the root of your repository on `GITHUB_REPOSITORY_BRANCH`. [Example](https://github.com/zanechua/website/blob/master/staticman.yml)
 
 ## API
 
