@@ -72,10 +72,11 @@ app.post('/api/handle/form', async c => {
   const allowedFields = staticmanCommentsConfig?.allowedFields || [];
   const requiredFields = staticmanCommentsConfig?.requiredFields || [];
   const moderation = staticmanCommentsConfig?.moderation || true;
-  const transforms = staticmanCommentsConfig?.transforms || {};
+  const fieldTransforms = staticmanCommentsConfig?.transforms || staticmanCommentsConfig?.fieldTransforms || {};
+  const optionTransforms = staticmanCommentsConfig?.optionTransforms || {};
 
   // Build input fields schema
-  const fieldInputSchema = z.object(buildSchemaObject(allowedFields, requiredFields, transforms)).strict();
+  const fieldInputSchema = z.object(buildSchemaObject(allowedFields, requiredFields, fieldTransforms)).strict();
 
   // Validate the input fields and escape
   const {
@@ -89,7 +90,7 @@ app.post('/api/handle/form', async c => {
   }
 
   // Build input options schema
-  const optionInputSchema = z.object(buildSchemaObject(Object.keys(optionValues), [], transforms)).strict();
+  const optionInputSchema = z.object(buildSchemaObject(Object.keys(optionValues), [], optionTransforms)).strict();
 
   // Validate the input options and escape
   const { validatedSchema: validatedOptions } = await Validator.check(optionInputSchema, optionValues);

@@ -1,31 +1,6 @@
 import { escape } from 'lodash';
 import { z } from 'zod';
 
-const buildSchemaObject = (allowedFields, requiredFields, transforms = {}) => {
-  const obj = {};
-  for (const key of allowedFields) {
-    obj[key] = requiredFields.includes(key)
-      ? z
-          .string()
-          .transform(val => escape(val))
-          .transform(async val =>
-            Object.prototype.hasOwnProperty.call(transforms, key)
-              ? await handleHash(transforms[key], val)
-              : val
-          )
-      : z
-          .string()
-          .transform(val => escape(val))
-          .transform(async val =>
-            Object.prototype.hasOwnProperty.call(transforms, key)
-              ? await handleHash(transforms[key], val)
-              : val
-          )
-          .optional();
-  }
-  return obj;
-};
-
 const handleHash = async (algorithm, string) => {
   const digestMap = {
     sha1: 'SHA-1',
@@ -50,6 +25,37 @@ const handleHash = async (algorithm, string) => {
     .join(""); // convert bytes to hex string
 
   return hashHex;
+};
+
+const handleTransformation = async (transformationKey, value) => {
+  if (transformationKey === 'escape') {
+    return escape(value);
+  } else {
+    return await handleHash(transformationKey, value);
+  }
+}
+
+const buildSchemaObject = (allowedFields, requiredFields, transforms = {}) => {
+  const obj = {};
+  for (const key of allowedFields) {
+    obj[key] = requiredFields.includes(key)
+      ? z
+        .string()
+        .transform(async val =>
+          Object.prototype.hasOwnProperty.call(transforms, key)
+            ? await handleTransformation(transforms[key], val)
+            : val
+        )
+      : z
+        .string()
+        .transform(async val =>
+          Object.prototype.hasOwnProperty.call(transforms, key)
+            ? await handleTransformation(transforms[key], val)
+            : val
+        )
+        .optional();
+  }
+  return obj;
 };
 
 export { buildSchemaObject };
