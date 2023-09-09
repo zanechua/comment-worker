@@ -71,7 +71,7 @@ app.post('/api/handle/form', async c => {
   // Handle the default config from the yml file
   const allowedFields = staticmanCommentsConfig?.allowedFields || [];
   const requiredFields = staticmanCommentsConfig?.requiredFields || [];
-  const moderation = staticmanCommentsConfig?.moderation || true;
+  const moderation = staticmanCommentsConfig?.moderation === 'true' || true;
   const fieldTransforms = staticmanCommentsConfig?.transforms || staticmanCommentsConfig?.fieldTransforms || {};
   const optionTransforms = staticmanCommentsConfig?.optionTransforms || {};
 
