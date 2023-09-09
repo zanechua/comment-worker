@@ -1,0 +1,52 @@
+comments:
+  # (*) REQUIRED
+  #
+  # Names of the fields the form is allowed to submit. If a field that is
+  # not here is part of the request, an error will be thrown.
+  allowedFields: ['name', 'email', 'message']
+
+  # Names of the options the form is allowed to submit. If an option that is
+  # not here is part of the request, an error will be thrown.
+  allowedOptions: ['slug', 'url']
+
+  # (*) REQUIRED
+  #
+  # Name of the branch being used. Must match the one sent in the URL of the
+  # request.
+  branch: 'master'
+
+  # Text to use as the commit message or pull request title. Accepts placeholders.
+  commitMessage: 'chore: New comment on {fields.slug}'
+
+  # (*) REQUIRED
+  #
+  # Destination path (filename) for the data files. Accepts placeholders.
+  filename: '{fields.slug}-entry{@timestamp}'
+
+  # Whether entries need to be approved before they are published to the main
+  # branch. If set to `true`, a pull request will be created for your approval.
+  # Otherwise, entries will be published to the main branch automatically.
+  moderation: true
+
+  # (*) REQUIRED
+  #
+  # Destination path (directory) for the data files. Accepts placeholders.
+  path: 'src/comments'
+
+  # Names of required fields. If any of these isn't in the request or is empty,
+  # an error will be thrown.
+  requiredFields: ['name', 'email', 'message']
+
+  # Names of required options. If any of these isn't in the request or is empty,
+  # an error will be thrown.
+  requiredOptions: ['slug']
+
+  # List of transformations to apply to any of the fields supplied. Keys are
+  # the name of the field and values are possible transformation types.
+  fieldTransforms:
+    email: sha512
+
+  # List of transformations to apply to any of the options supplied. Keys are
+  # the name of the option and values are possible transformation types.
+  optionsTransforms:
+    slug: escape
