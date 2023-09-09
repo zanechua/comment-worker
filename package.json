@@ -10,7 +10,7 @@
     "release": "standard-version -a",
     "deploy": "wrangler deploy"
   },
-  "author": "PubInf",
+  "author": "ZaneChua",
   "contributors": [
     {
       "name": "Zane J. Chua",
