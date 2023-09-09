@@ -5,6 +5,7 @@ import { cors } from 'hono/cors';
 import { isUndefined } from 'lodash';
 import yaml from 'yaml';
 import { z } from 'zod';
+import { Base64 } from 'js-base64';
 
 import GitHub from './github';
 import { convertFormDataToObject, handlePlaceholders, objectToMarkdownTable } from './util';
@@ -40,11 +41,14 @@ app.post('/api/handle/form', async c => {
   const formattedPrivateKey = env.GITHUB_APP_PRIVATE_KEY.replace(/\\n/g, '\n');
   const organizationSlug = env.GITHUB_ORGANIZATION_SLUG;
   const repositorySlug = env.GITHUB_REPOSITORY_SLUG;
+  const repositoryBranch = env.GITHUB_REPOSITORY_BRANCH;
+  const shouldDebug = env.CW_DEBUG === 'true';
 
   const gh = await GitHub.initialize(appId, formattedPrivateKey, organizationSlug, repositorySlug);
 
-  const staticmanFile = await gh.getFileFromRepository('staticman.yml', 'master');
-  const staticmanConfigJson = yaml.parse(atob(staticmanFile.content));
+  const staticmanFile = await gh.getFileFromRepository('staticman.yml', repositoryBranch);
+
+  const staticmanConfigJson = yaml.parse(Base64.decode(staticmanFile.content));
   const staticmanCommentsConfig = staticmanConfigJson.comments;
 
   let body;
@@ -61,6 +65,8 @@ app.post('/api/handle/form', async c => {
   // Handle the fields and options
   const fieldValues = body.fields || {};
   const optionValues = body.options || {};
+
+  if (shouldDebug) console.log(fieldValues);
 
   // Handle the default config from the yml file
   const allowedFields = staticmanCommentsConfig?.allowedFields || [];
@@ -111,8 +117,9 @@ app.post('/api/handle/form', async c => {
   const directoryPath = Object.prototype.hasOwnProperty.call(staticmanCommentsConfig, 'path')
     ? handlePlaceholders(staticmanCommentsConfig.path, fields, validatedOptions)
     : `_data/results/${new Date(fields.date).valueOf()}`;
+
   const yamlData = yaml.stringify(fields);
-  const base64YamlData = btoa(yamlData);
+  const base64YamlData = Base64.encode(yamlData);
 
   const defaultBranch = staticmanCommentsConfig?.branch || 'master';
   const branch = `commentworker_${commentId}`;
