@@ -140,7 +140,7 @@ app.post('/api/handle/form', async c => {
   );
 
   if (!createCommentFileResponse?.content) {
-    return c.text('Failed to create comment file. Please check if your file path is valid.', createCommentFileResponse.status);
+    return c.text('Failed to create comment file. Please check if your file path is valid.', 422);
   }
 
   if (moderation) {
